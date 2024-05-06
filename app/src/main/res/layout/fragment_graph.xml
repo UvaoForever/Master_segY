@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/layoutG"
+    tools:context=".program.GraphFragment"
+    android:background="@color/background">
+
+    <TextView
+        android:id="@+id/textViewRotation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:gravity="end"
+        android:text="@string/rotate_chart" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight = "10"
+        >
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.github.mikephil.charting.charts.LineChart>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/textViewFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/filter"
+        app:drawableLeftCompat="@drawable/baseline_arrow_drop_down_24" />
+
+    <LinearLayout
+        android:id="@+id/layoutFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <CheckedTextView
+            android:id="@+id/dcRemoval"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:checked="false"
+            android:gravity="center"
+            android:text="@string/dc_removal" />
+
+        <CheckedTextView
+            android:id="@+id/autoStaticCorrection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:checked="false"
+            android:gravity="center"
+            android:text="@string/auto_static_correction" />
+
+        <CheckedTextView
+            android:id="@+id/amplitudeCorrection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:checked="false"
+            android:gravity="center"
+            android:text="@string/amplitude_correction" />
+
+        <EditText
+            android:id="@+id/editTextNumberAmplitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/amplitude_correction"
+            android:inputType="number"
+            android:visibility="gone" />
+
+        <CheckedTextView
+            android:id="@+id/gain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:checked="false"
+            android:gravity="center"
+            android:text="@string/signal_amplification" />
+
+        <EditText
+            android:id="@+id/editTextNumberGain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/signal_amplification"
+            android:inputType="number"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewBorder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/border"
+        app:drawableStartCompat="@drawable/baseline_arrow_drop_down_24" />
+
+
+    <LinearLayout
+        android:id="@+id/layoutBorder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/textViewMark1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="@string/marker_one" />
+
+            <EditText
+                android:id="@+id/editTextNumberDecimalMareker1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="numberDecimal"
+                android:text="0" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewMark2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="@string/marker_two" />
+
+
+            <EditText
+                android:id="@+id/editTextNumberDecimalMarker2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="numberDecimal"
+                android:text="0" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutRez"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/speed"
+                app:drawableStartCompat="@drawable/baseline_speed_24" />
+
+            <EditText
+                android:id="@+id/editTextSpeedRez"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewLength"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/length"
+                app:drawableStartCompat="@drawable/baseline_length" />
+
+            <TextView
+                android:id="@+id/textViewLengthRez"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+
+

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission
+        android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
+
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission
+        android:name="android.permission.STORAGE"
+        tools:node="merge" />
+
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Master_segY"
+        tools:targetApi="28"
+        android:screenOrientation="portrait">
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:grantUriPermissions="true"
+            android:exported="false"
+            android:authorities="${applicationId}">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths"/>
+        </provider>
+
+        <activity
+            android:name=".program.work_planning.traceP.ReportTraceActivity"
+            android:exported="false"
+            android:parentActivityName=".program.work_planning.reportP.ReportsActivity"
+            android:theme="@style/Theme.Master_segY.NoActionBar"/>
+        <activity
+            android:name=".program.work_planning.plateP.PlatesActivity"
+            android:exported="false"
+            android:parentActivityName=".program.MainActivity"
+            android:theme="@style/Theme.Master_segY.NoActionBar">
+      </activity>
+        <activity
+            android:name=".program.work_planning.pointP.PointsActivity"
+            android:exported="false"
+            android:parentActivityName=".program.work_planning.plateP.PlatesActivity"
+            android:theme="@style/Theme.Master_segY.NoActionBar">
+        </activity>
+        <activity
+            android:name=".program.work_planning.reportP.ReportsActivity"
+            android:exported="false"
+            android:parentActivityName=".program.work_planning.pointP.PointsActivity"
+            android:theme="@style/Theme.Master_segY.NoActionBar" />
+        <activity
+            android:name=".program.PrimaryProcessingActivity"
+            android:exported="false"
+            android:label="@string/title_activity_primary_processing"
+            android:parentActivityName=".program.MainActivity"
+            android:theme="@style/Theme.Master_segY.NoActionBar" />
+        <activity
+            android:name=".program.work_planning.conditionP.ConditionActivity"
+            android:exported="true"
+            android:label="@string/title_activity_plate_condition"
+            android:parentActivityName=".program.MainActivity"
+            android:theme="@style/Theme.Master_segY.NoActionBar"/>
+        <activity
+            android:name=".program.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Master_segY.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

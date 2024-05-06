@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Master segY</string>
+    <string name="menu_work_planning">Планирование работ</string>
+    <string name="title_activity_primary_processing">Первичная обработка segY</string>
+    <string name="length">Длина</string>
+    <string name="speed">Скорость</string>
+    <string name="border">Маркеры</string>
+    <string name="amplitude_correction">Амплитудная коррекция</string>
+    <string name="auto_static_correction">Автостаческая поправка</string>
+    <string name="dc_removal">Удаление постоянной составляющей</string>
+    <string name="filter">Фильтры</string>
+    <string name="add_address">Добавить адрес</string>
+    <string name="addFile">Добавить файл</string>
+    <string name="edit_object">Изменить объект</string>
+    <string name="delete_object">Удалить объект</string>
+    <string name="share">Поделиться</string>
+    <string name="save">Сохранить</string>
+    <string name="get_coordinate">Получить координаты</string>
+    <string name="coordinate">Координаты</string>
+    <string name="add_file">Добавить файл</string>
+    <string name="files">Файлы</string>
+    <string name="time">Время</string>
+    <string name="marker_one">Маркер начала</string>
+    <string name="marker_two">Маркер конца</string>
+    <string name="questionDelete">Хотите удалить?</string>
+    <string name="questionSave">Хотите сохранить?</string>
+    <string name="answerYes">Да</string>
+    <string name="answerNo">Нет</string>
+    <string name="resultDelete">Удалено</string>
+    <string name="resultSave">Сохранено</string>
+    <string name="fieldError">Заполните все обязательные поля</string>
+    <string name="titleError">Название должно быть обязательно заполнено</string>
+    <string name="dateError">Дата должна быть обязательно заполнена</string>
+    <string name="coordinateError">Координаты должны быть обязательно заполнены</string>
+    <string name="trace">Сейсмотрасса</string>
+    <string name="errorExtension">Файл должен иметь расширение sgy или segy</string>
+    <string name="searchObject">Поиск объекта полевых работ</string>
+    <string name="altitude">Высота</string>
+    <string name="signal_amplification">Усиление сигнала</string>
+    <string name="rotate_chart">Повернуть график</string>
+    <string name="coordinate_x">Широта</string>
+    <string name="coordinate_y">Долгота</string>
+    <string name="title">Название</string>
+    <string name="address">Адрес</string>
+    <string name="date">Дата</string>
+    <string name="resultNo">Нет</string>
+
+
+
+    <string name="questionStiltOrPlate">Создать сваю или плиту?</string>
+    <string name="answerStilt">Сваю</string>
+    <string name="answerPlate">Плиту</string>
+    <string name="answerCancel">Отмена</string>
+
+    <string name="title_activity_plate_condition">Состояние плиты</string>
+    <string name="description">Описание</string>
+    <string name="x">Координата X</string>
+    <string name="y">Координата Y</string>
+    <string name="descriptionError">Описание должно быть обязательно заполнено</string>
+    <string name="xError">Координата X должна быть заполнена</string>
+    <string name="yError">Координата Y должна быть заполнена</string>
+    <string name="startX">Начальный X</string>
+    <string name="startY">Начальный Y</string>
+    <string name="endX">Конечный X</string>
+    <string name="endY">Конечный Y</string>
+    <string name="stepX">Шаг X</string>
+    <string name="stepY">Шаг Y</string>
+    <string name="selectAttribute">Выберите атрибут</string>
+    <string name="selectPlate">Выберите плиту</string>
+    <string name="enterStepX">Введите шаг по X</string>
+    <string name="enterStepY">Введите шаг по Y</string>
+    <string name="btnCalculate">Посчитать</string>
+    <string name="attr1">Атрибут 1 - Значение сигнала</string>
+    <string name="attr2">Атрибут 2 - Нормированный сигнал</string>
+    <string name="attr3">Атрибут 3 - Частота максимума спектра Фурье</string>
+    <string name="attr4">Атрибут 4 - Площадь спектра</string>
+    <string name="attr5">Атрибут 5 - Нормированный спектр</string>
+    <string name="attr6">Атрибут 6 - Средневзвешенная частота</string>
+    <string name="stepX_Error">Шаг по X должен быть заполнен</string>
+    <string name="stepY_Error">Шаг по Y должен быть заполнен</string>
+</resources>

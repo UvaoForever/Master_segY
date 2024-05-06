@@ -1,0 +1,86 @@
+<resources>
+    <string name="app_name">Master segY</string>
+
+
+
+    <string name="menu_work_planning">Work planning</string>
+    <string name="title_activity_primary_processing">Primary processing</string>
+    <string name="length">Length</string>
+    <string name="speed">Speed</string>
+    <string name="border">Border</string>
+    <string name="amplitude_correction">Amplitude Correction</string>
+    <string name="auto_static_correction">Auto Static Correction</string>
+    <string name="dc_removal">DC Removal</string>
+    <string name="filter">Filter</string>
+
+    <string name="add_address">add an address</string>
+    <string name="addFile">Add File</string>
+    <string name="edit_object">Edit object</string>
+    <string name="delete_object">Delete Object</string>
+    <string name="share">Share</string>
+    <string name="save">Save</string>
+    <string name="coordinate_x">Latitude</string>
+    <string name="coordinate_y">Longitude</string>
+    <string name="get_coordinate">Get coordinate</string>
+    <string name="coordinate">Coordinates</string>
+    <string name="add_file">Add file</string>
+    <string name="files">Files</string>
+    <string name="time">Time</string>
+    <string name="marker_one">Marker start</string>
+    <string name="marker_two">Marker end</string>
+
+    <string name="questionDelete">Do you want to delete?</string>
+    <string name="questionSave">Do you want to save?</string>
+    <string name="answerYes">Yes</string>
+    <string name="answerNo">No</string>
+    <string name="resultDelete">Deleted</string>
+    <string name="resultSave">Saved</string>
+    <string name="fieldError">Fill in required fields</string>
+    <string name="titleError">Title field must be filled</string>
+    <string name="dateError">Date field must be filled</string>
+    <string name="coordinateError">Coordinate field must be filled</string>
+    <string name="trace">Seismic trace</string>
+    <string name="errorExtension">The file extension must be sgy or segy</string>
+    <string name="searchObject">Search object location</string>
+    <string name="altitude">Altitude</string>
+    <string name="signal_amplification">Signal amplification</string>
+    <string name="rotate_chart">Rotate chart</string>
+    <string name="title">Title</string>
+    <string name="address">Address</string>
+    <string name="date">Date</string>
+    <string name="resultNo">Not</string>
+
+
+
+    <string name="questionStiltOrPlate">Create a stilt or plate?</string>
+    <string name="answerStilt">Stilt</string>
+    <string name="answerPlate">Plate</string>
+    <string name="answerCancel">Cancel</string>
+
+    <string name="title_activity_plate_condition">Plate Condition</string>
+    <string name="description">Description</string>
+    <string name="x">Coordinate X</string>
+    <string name="y">Coordinate Y</string>
+    <string name="descriptionError">Description field must be filled</string>
+    <string name="xError">Coordinate X must be filled</string>
+    <string name="yError">Coordinate Y must be filled</string>
+    <string name="startX">Start X</string>
+    <string name="startY">Start Y</string>
+    <string name="endX">End X</string>
+    <string name="endY">End Y</string>
+    <string name="stepX">Step X</string>
+    <string name="stepY">Step Y</string>
+    <string name="stepX_Error">Step X must be filled</string>
+    <string name="stepY_Error">Step Y must be filled</string>
+    <string name="selectPlate">Select plate</string>
+    <string name="enterStepX">Enter step X</string>
+    <string name="enterStepY">Enter step Y</string>
+    <string name="btnCalculate">Calculate</string>
+    <string name="selectAttribute">Select attribute</string>
+    <string name="attr1">Attribute 1 - Signal value</string>
+    <string name="attr2">Attribute 2 - Normalized signal</string>
+    <string name="attr3">Attribute 3 - Frequency of the maximum of the Fourier spectrum</string>
+    <string name="attr4">Attribute 4 - Fourier spectrum area</string>
+    <string name="attr5">Attribute 5 - Normalized Fourier spectrum</string>
+    <string name="attr6">Attribute 6 - Weighted average frequency</string>
+</resources>

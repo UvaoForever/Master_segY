@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_work_planning">
+
+    <fragment
+        android:id="@+id/nav_work_planning"
+        android:name="com.example.master_segy.program.work_planning.objectLocationP.WorkPlanningFragment"
+        android:label="@string/menu_work_planning"
+        tools:layout="@layout/fragment_work_planning" />
+    <activity
+        android:id="@+id/nav_primary_processing"
+        android:name="com.example.master_segy.program.PrimaryProcessingActivity"
+        android:label="@string/title_activity_primary_processing"
+        tools:layout="@layout/activity_primary_processing"/>
+    <activity
+        android:id="@+id/nav_plate_condition"
+        android:name="com.example.master_segy.program.work_planning.conditionP.ConditionActivity"
+        android:label="@string/title_activity_plate_condition"
+        tools:layout="@layout/activity_report_trace"/>
+
+
+</navigation>

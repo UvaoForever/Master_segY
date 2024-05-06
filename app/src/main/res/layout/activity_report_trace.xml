@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    tools:context=".program.work_planning.traceP.ReportTraceActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.Master_segY.AppBarOverlay">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarReportTrace"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/toolbar"
+            app:popupTheme="@style/Theme.Master_segY.PopupOverlay" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <Button
+        android:id="@+id/buttonAddFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:backgroundTint="@color/button"
+        android:text="@string/add_file" />
+    <TextView
+        android:id="@+id/textViewFiles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/files"
+        app:drawableLeftCompat="@drawable/baseline_arrow_drop_down_24" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewTrace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/style_row" />
+    <fragment
+        android:id="@+id/fragmentGraphTrace"
+        android:name="com.example.master_segy.program.GraphFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        tools:layout="@layout/fragment_graph" />
+</LinearLayout>

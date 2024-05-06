@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/background"
+        android:orientation="vertical">
+
+        <!-- Начальный X-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutStartX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputStartX"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/startX"
+                android:inputType="number|numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Конечный X-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutEndX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputEndX"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/endX"
+                android:inputType="number|numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Начальный Y-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutStartY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputStartY"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/startY"
+                android:inputType="number|numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Конечный Y-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutEndY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputEndY"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/endY"
+                android:inputType="number|numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Шаг X-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutStepX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputStepX"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/stepX"
+                android:inputType="number|numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Шаг Y-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutStepY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputStepY"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/stepY"
+                android:inputType="number|numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/buttonSavePoint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/button"
+            android:text="@string/save" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_work_planning"
+            android:icon="@drawable/baseline_calendar_month_24"
+            android:title="@string/menu_work_planning" />
+        <item
+            android:id="@+id/nav_primary_processing"
+            android:icon="@drawable/baseline_stacked_line_chart_24"
+            android:title="@string/title_activity_primary_processing" />
+        <item
+            android:id="@+id/nav_plate_condition"
+            android:icon="@drawable/baseline_calendar_month_24"
+            android:title="@string/title_activity_plate_condition" />
+
+    </group>
+</menu>
