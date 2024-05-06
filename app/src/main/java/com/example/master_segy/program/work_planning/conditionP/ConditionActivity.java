@@ -348,7 +348,7 @@ public class ConditionActivity extends AppCompatActivity {
         }
     }
 
-    // Энергия сигнала
+    // Энергия сигнала, проверка
     public double[][] attribyteOne(ArrayList<Trace> trails, int dt){
         double e = 0;
         //creatingArrays();
