@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -348,7 +349,7 @@ public class ConditionActivity extends AppCompatActivity {
         }
     }
 
-    // Энергия сигнала, проверка
+    // Энергия сигнала
     public double[][] attribyteOne(ArrayList<Trace> trails, int dt){
         double e = 0;
         //creatingArrays();
@@ -651,17 +652,6 @@ public class ConditionActivity extends AppCompatActivity {
             }
             s += "\n";
         }
-        // Создание объекта Paint для установки цвета и других параметров отрисовки
-// Получение объекта Canvas для рисования
-        Canvas canvas = new Canvas(resultBitmap);
-// Установка размера точки
-
-        Paint paint = new Paint();
-        paint.setStrokeWidth(1);
-        paint.setColor(Color.BLACK);
-        paint.setStyle(Paint.Style.STROKE);
-        //canvas.drawPoint(1, 1, paint);
-        //canvas.drawPoint(2, 2, paint);
         imageView.setImageBitmap(resultBitmap);
     }
 
