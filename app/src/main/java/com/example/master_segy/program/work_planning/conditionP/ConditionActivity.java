@@ -1,30 +1,23 @@
 package com.example.master_segy.program.work_planning.conditionP;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +31,6 @@ import com.example.master_segy.data.pointP.Point;
 import com.example.master_segy.data.reportP.Report;
 import com.example.master_segy.data.traceP.Trace;
 import com.example.master_segy.databinding.ActivityConditionBinding;
-import com.example.master_segy.program.DataReaderTraceFile_Segy;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.commons.math3.analysis.interpolation.BicubicInterpolatingFunction;
@@ -48,17 +40,10 @@ import org.apache.commons.math3.transform.DftNormalization;
 import org.apache.commons.math3.transform.FastFourierTransformer;
 import org.apache.commons.math3.transform.TransformType;
 
-import android.widget.Toast;
-
-import java.io.File;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Random;
 import java.util.TreeSet;
 
 public class ConditionActivity extends AppCompatActivity {
@@ -78,7 +63,7 @@ public class ConditionActivity extends AppCompatActivity {
     boolean itemSelected = false;
     private EditText editText_X, editText_Y;
     private TextInputLayout textInputLayoutX, textInputLayoutY;
-    private TextView mActionOk;
+    private TextView mActionOk, textViewGreen, textViewYellow, textViewOrenge, textViewRed;
     private long attribute_id = 0;
     String item, titleObject, titlePlate;
     ArrayList<String> spinnerList = new ArrayList<String>();
@@ -164,6 +149,10 @@ public class ConditionActivity extends AppCompatActivity {
                     correctionTraceList(titleObject, titlePlate);
                     creatingArrays();
                     dataReadingFromBD();
+                    Bundle bundle = new Bundle();
+                    ConditionLegend dialog = new ConditionLegend();
+                    dialog.setArguments(bundle);
+                    dialog.show(getSupportFragmentManager(), "c");
                 }
             }
 
@@ -245,28 +234,29 @@ public class ConditionActivity extends AppCompatActivity {
 
         switch ((int) attribute_id){
             case 1:
-                points = attribyteOne(traceList, traceList.get(0).get_dt());
+                points = attributeOne(traceList, traceList.get(0).get_dt());
                 break; // Энергия сигнала, атрибут 1
             case 2:
                 traceList = normalization(traceList); // Нормирование сигнала, для атрибута 2
-                points = attribyteOne(traceList, traceList.get(0).get_dt());
+                points = attributeOne(traceList, traceList.get(0).get_dt());
                 break;
             case 3:
-                points = attribyteThree(traceList); // Расчёт частоты максимума спектра Фурье, атрибут 3
+                points = attributeThree(traceList); // Расчёт частоты максимума спектра Фурье, атрибут 3
                 break;
             case 4:
-                points = attribyteFour(traceList, false); // Расчёт площади спектра, атрибут 4
+                points = attributeFour(traceList, false); // Расчёт площади спектра, атрибут 4
                 break;
             case 5:
-                points = attribyteFour(traceList, true); // Нормирование спектра Фурье, для атрибута 5
+                points = attributeFour(traceList, true); // Нормирование спектра Фурье, для атрибута 5
                 break;
             case 6:
                 //points = attribyteThree(traceList);
-                points = attribyteSix(traceList);
+                points = attributeSix(traceList);
                 break;
             default: return;
         }
         interpolation(points);
+        //createLegend();
     }
 
     // Возможно удалить
@@ -350,7 +340,7 @@ public class ConditionActivity extends AppCompatActivity {
     }
 
     // Энергия сигнала
-    public double[][] attribyteOne(ArrayList<Trace> trails, int dt){
+    public double[][] attributeOne(ArrayList<Trace> trails, int dt){
         double e = 0;
         //creatingArrays();
         double[][] points = new double[arrayX.size()][arrayY.size()];
@@ -384,7 +374,7 @@ public class ConditionActivity extends AppCompatActivity {
     }
 
     // Спектр Фурье
-    public double[][] attribyteThree(ArrayList<Trace> trails){
+    public double[][] attributeThree(ArrayList<Trace> trails){
         //creatingArrays();
         double[][] points = new double[arrayX.size()][arrayY.size()];
         for (int i = 0; i < trails.size(); i++){
@@ -424,14 +414,15 @@ public class ConditionActivity extends AppCompatActivity {
                     break;
                 index_x++;
             }
-            double df = (maxAmplitude - minAmplitude) * 1.0 / (trails.get(i).get_samples_count());
+            //double df = (maxAmplitude - minAmplitude) * 1.0 / (trails.get(i).get_samples_count());
+            double df = 1 * 1.0 / (traceList.get(i).get_dt() * (traceList.get(i).get_samples_count() - 1));
             points[index_x][index_y] = maxFrequencyIndex * df; //maxFrequencyIndex * trails.get(i).get_FS() / signal.length;//maxAmplitude;
         }
         return points;
     }
 
     // Шаг дискретизации по частоте
-    public double[][] attribyteFour(ArrayList<Trace> trails, boolean normalize){
+    public double[][] attributeFour(ArrayList<Trace> trails, boolean normalize){
         double e = 0;
         double[][] points = new double[arrayX.size()][arrayY.size()];
         for (int i = 0; i < trails.size(); i++) {
@@ -457,8 +448,8 @@ public class ConditionActivity extends AppCompatActivity {
                     minAmplitude = amplitude;
             }
 
-            //double df = 1 * 1.0 / (traceList.get(i).get_dt() * (traceList.get(i).get_samples_count() - 1)); // Шаг дискретизации по частоте
-            double df = (maxAmplitude - minAmplitude) * 1.0 / (trails.get(i).get_samples_count());
+            double df = 1 * 1.0 / (traceList.get(i).get_dt() * (traceList.get(i).get_samples_count() - 1)); // Шаг дискретизации по частоте
+            //double df = (maxAmplitude - minAmplitude) * 1.0 / (trails.get(i).get_samples_count());
             for (int j = 0; j < transformedData.length / 2; j++) {
                 double data = Math.pow(transformedData[j].abs(), 2);
                 if (normalize == true)
@@ -483,7 +474,7 @@ public class ConditionActivity extends AppCompatActivity {
 
     }
 
-    public double[][] attribyteSix(ArrayList<Trace> trails){
+    public double[][] attributeSix(ArrayList<Trace> trails){
         double[][] points = new double[arrayX.size()][arrayY.size()];
         for (int i = 0; i < trails.size(); i++) {
             int idReport = reportList.get(i).get_id();
@@ -508,7 +499,7 @@ public class ConditionActivity extends AppCompatActivity {
                     minAmplitude = amplitude;
             }
 
-            double df = (maxAmplitude - minAmplitude) * 1.0 / (trails.get(i).get_samples_count());
+            double df = 1 * 1.0 / (traceList.get(i).get_dt() * (traceList.get(i).get_samples_count() - 1));
             double numerator = 0; // Числитель
             double denumerator = 0; // Знаменатель
             for (int j = 0; j < transformedData.length / 2; j++) {
@@ -575,14 +566,15 @@ public class ConditionActivity extends AppCompatActivity {
         double maxY = maxCoordinate(arrayY);
         double dx = (maxX - minX) * 1.0 / (countX - 1);
         double dy = (maxY - minY) * 1.0 / (countY - 1);
-        /*for (int i = 1; i <= countX; i++){
-            xNew[i-1] = i * dx;
+        for (int i = 0; i < countX; i++){
+            xNew[i] = minX + i * dx;
         }
         xNew[countX - 1] = maxX;
-        for (int i = 1; i <= countY; i++){
-            yNew[i-1] = i * dy;
-        }*/
-        Log.i("dx = ", String.valueOf(dx));
+        for (int i = 0; i < countY; i++){
+            yNew[i] = minY + i * dy;
+        }
+        yNew[countY - 1] = maxY;
+        /*Log.i("dx = ", String.valueOf(dx));
         int k = 0;
         int repeat = 0;
         int position = 0;
@@ -621,8 +613,8 @@ public class ConditionActivity extends AppCompatActivity {
                 }
             }
         }
-        yNew[countY - 1] = maxY;
-        imageView = (ImageView) findViewById(R.id.imageViewPlate);
+        yNew[countY - 1] = maxY;*/
+        imageView = findViewById(R.id.imageViewPlate);
         Bitmap resultBitmap = Bitmap.createBitmap(xNew.length, yNew.length, Bitmap.Config.ARGB_8888);
 
 

@@ -83,4 +83,9 @@
     <string name="attr4">Attribute 4 - Fourier spectrum area</string>
     <string name="attr5">Attribute 5 - Normalized Fourier spectrum</string>
     <string name="attr6">Attribute 6 - Weighted average frequency</string>
+    <string name="plate_orange">The plate is damaged</string>
+    <string name="plate_green">The plate is intact</string>
+    <string name="plate_yellow">The plate is slightly damaged</string>
+    <string name="plate_light_red">The plate is serious damaged</string>
+    <string name="plate_red">The plate is in critical condition</string>
 </resources>

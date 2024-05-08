@@ -79,4 +79,9 @@
     <string name="attr6">Атрибут 6 - Средневзвешенная частота</string>
     <string name="stepX_Error">Шаг по X должен быть заполнен</string>
     <string name="stepY_Error">Шаг по Y должен быть заполнен</string>
+    <string name="plate_green">Плита цела</string>
+    <string name="plate_yellow">Плита слегка повреждена</string>
+    <string name="plate_orange">Плита повреждена</string>
+    <string name="plate_light_red">Плита серьёзно повреждена</string>
+    <string name="plate_red">Плита в критическом состоянии</string>
 </resources>

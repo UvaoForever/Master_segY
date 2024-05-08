@@ -66,8 +66,6 @@
     <ImageView
         android:id="@+id/imageViewPlate"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="89dp" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>
