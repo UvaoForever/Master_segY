@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/resultText"
@@ -22,7 +22,7 @@
         android:id="@+id/spinnerPlate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/selection"/>
+        app:layout_constraintTop_toBottomOf="@+id/selection" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextLayoutX"
@@ -33,6 +33,7 @@
             android:id="@+id/editTextX"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:hint="@string/enterStepX"
             android:inputType="number|numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -46,6 +47,7 @@
             android:id="@+id/editTextY"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:hint="@string/enterStepY"
             android:inputType="number|numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -53,7 +55,8 @@
     <Spinner
         android:id="@+id/spinnerAttribute"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp" />
 
     <Button
         android:id="@+id/buttonCalculate"
@@ -63,9 +66,36 @@
         android:backgroundTint="@color/button"
         android:text="@string/btnCalculate" />
 
-    <ImageView
-        android:id="@+id/imageViewPlate"
+    <Button
+        android:id="@+id/buttonLegend"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@color/button"
+        android:text="@string/btn_legend" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        android:rowCount="2">
+
+        <ImageView
+            android:id="@+id/imageViewY"
+            android:layout_width="74dp"
+            android:layout_height="match_parent"
+            android:layout_row="0"
+            android:layout_rowSpan="2"
+            android:layout_column="0" />
+
+        <ImageView
+            android:id="@+id/imageViewPlate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_row="0"
+            android:layout_column="1" />
+
+    </GridLayout>
+
 
 </LinearLayout>

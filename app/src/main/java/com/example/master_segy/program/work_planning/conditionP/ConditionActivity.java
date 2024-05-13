@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -31,6 +33,10 @@ import com.example.master_segy.data.pointP.Point;
 import com.example.master_segy.data.reportP.Report;
 import com.example.master_segy.data.traceP.Trace;
 import com.example.master_segy.databinding.ActivityConditionBinding;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.commons.math3.analysis.interpolation.BicubicInterpolatingFunction;
@@ -44,6 +50,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.TreeSet;
 
 public class ConditionActivity extends AppCompatActivity {
@@ -63,7 +70,7 @@ public class ConditionActivity extends AppCompatActivity {
     boolean itemSelected = false;
     private EditText editText_X, editText_Y;
     private TextInputLayout textInputLayoutX, textInputLayoutY;
-    private TextView mActionOk, textViewGreen, textViewYellow, textViewOrenge, textViewRed;
+    private TextView mActionOk, mLegend;
     private long attribute_id = 0;
     String item, titleObject, titlePlate;
     ArrayList<String> spinnerList = new ArrayList<String>();
@@ -79,17 +86,22 @@ public class ConditionActivity extends AppCompatActivity {
         binding = ActivityConditionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
+
         db = AppDataBase.getInstance(getApplicationContext());
         plateList = new ArrayList<Plate>(db.plateDao().getAll()); // Получение всех плит
         pointList = new ArrayList<Point>(db.pointDao().getAll()); // Получение координат ВСЕХ точек
         reportList = new ArrayList<Report>(db.reportDao().getAll()); // Получение всех отчётов
         traceList = new ArrayList<Trace>(db.traceDao().getAll()); // Получение всех трасс
         itemSelected = false;
+
         editText_X = findViewById(R.id.editTextX);
         editText_Y = findViewById(R.id.editTextY);
         textInputLayoutX = findViewById(R.id.editTextLayoutX);
         textInputLayoutY = findViewById(R.id.editTextLayoutY);
+
         mActionOk = findViewById(R.id.buttonCalculate);
+        mLegend = findViewById(R.id.buttonLegend);
+
         createSpinnerList(); // Формирование списка для spinnerPlate
         createAttributeList(); // Формирование списка для spinnerAttribute
 
@@ -141,7 +153,7 @@ public class ConditionActivity extends AppCompatActivity {
         };
         spinnerAttribute.setOnItemSelectedListener(attributeSelectedListener);
 
-        // Обработчик нажатия на кнопку
+        // Обработчик нажатия на кнопку Посчитать
         mActionOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,13 +161,19 @@ public class ConditionActivity extends AppCompatActivity {
                     correctionTraceList(titleObject, titlePlate);
                     creatingArrays();
                     dataReadingFromBD();
-                    Bundle bundle = new Bundle();
-                    ConditionLegend dialog = new ConditionLegend();
-                    dialog.setArguments(bundle);
-                    dialog.show(getSupportFragmentManager(), "c");
                 }
             }
 
+        });
+
+        mLegend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 Bundle bundle = new Bundle();
+                 ConditionLegend dialog = new ConditionLegend();
+                 dialog.setArguments(bundle);
+                 dialog.show(getSupportFragmentManager(), "c");
+                }
         });
     }
 
@@ -617,7 +635,6 @@ public class ConditionActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageViewPlate);
         Bitmap resultBitmap = Bitmap.createBitmap(xNew.length, yNew.length, Bitmap.Config.ARGB_8888);
 
-
         // Вычисление коэффициентов интерполяции
         BicubicInterpolatingFunction function = interpolator.interpolate(
                 interpolatorArrayOne, // Столько же, сколько и СТРОК (Чёткие координаты X)
@@ -644,7 +661,56 @@ public class ConditionActivity extends AppCompatActivity {
             }
             s += "\n";
         }
+
         imageView.setImageBitmap(resultBitmap);
+        drawChart(xNew, yNew);
+    }
+
+    private void drawChart(double[] xNew, double yNew[]){
+        /*ImageView imageY = findViewById(R.id.imageViewY);
+        Bitmap bitmap = Bitmap.createBitmap(10, 10,
+                Bitmap.Config.ARGB_8888); // Область рисования для вывода или сохранения
+        Canvas bitmapCanvas = new Canvas(bitmap); // Используется для рисования на Bitmap
+        Paint paintScreen; // Используется для вывода Bitmap на экран
+        Paint paintLine = new Paint(); // Используется для рисования линий на Bitmap
+        // Исходные параметры рисуемых линий
+        paintLine = new Paint();
+        paintLine.setFilterBitmap(false);
+        paintLine.setAntiAlias(true); // Сглаживание краев
+        paintLine.setColor(Color.BLACK); // По умолчанию черный цвет
+        paintLine.setStyle(Paint.Style.STROKE); // Сплошная линия
+        paintLine.setStrokeWidth(5); // Толщина линии по умолчанию
+        paintLine.setStrokeCap(Paint.Cap.ROUND); // Закругленные концы
+        paintLine.setColor(Color.BLACK); // По умолчанию черный цвет
+        bitmapCanvas.drawLine(0, 0, 10, 0, paintLine);
+        bitmapCanvas.drawLine(5, 0, 5, 10, paintLine);
+
+        imageY.setImageBitmap(bitmap);*/
+
+        ConditionGraph graph = new ConditionGraph(this);
+        ImageView imageY = findViewById(R.id.imageViewY);
+        Bitmap bitmap = Bitmap.createBitmap(10, 10,
+                Bitmap.Config.ARGB_8888); // Область рисования для вывода или сохранения
+        Canvas bitmapCanvas = new Canvas(bitmap);
+        graph.onDraw(bitmapCanvas);
+        //setContentView(graph);
+
+        /*LineChart lineChart = findViewById(R.id.lineChart);
+
+        List<Entry> entries = new ArrayList<>();
+        entries.add(new Entry(0, 10)); // Точка с координатами x = 0, y = 10
+        entries.add(new Entry(1, 20)); // Точка с координатами x = 1, y = 20
+        entries.add(new Entry(2, 15)); // Точка с координатами x = 2, y = 15
+// Добавьте еще точки по мере необходимости
+
+        LineDataSet dataSet = new LineDataSet(entries, "Точки");
+        dataSet.setDrawCircles(true); // Отобразить окружности вокруг точек
+        dataSet.setColors(Color.RED); // Цвет точек и линии, если нужно
+
+        LineData lineData = new LineData(dataSet);
+        lineChart.setData(lineData);
+        lineChart.invalidate(); // Обновляет график*/
+
     }
 
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
