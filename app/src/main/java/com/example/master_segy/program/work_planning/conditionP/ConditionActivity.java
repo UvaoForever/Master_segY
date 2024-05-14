@@ -3,10 +3,8 @@ package com.example.master_segy.program.work_planning.conditionP;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -33,10 +31,6 @@ import com.example.master_segy.data.pointP.Point;
 import com.example.master_segy.data.reportP.Report;
 import com.example.master_segy.data.traceP.Trace;
 import com.example.master_segy.databinding.ActivityConditionBinding;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.commons.math3.analysis.interpolation.BicubicInterpolatingFunction;
@@ -50,7 +44,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.TreeSet;
 
 public class ConditionActivity extends AppCompatActivity {
@@ -70,7 +63,9 @@ public class ConditionActivity extends AppCompatActivity {
     boolean itemSelected = false;
     private EditText editText_X, editText_Y;
     private TextInputLayout textInputLayoutX, textInputLayoutY;
-    private TextView mActionOk, mLegend;
+    private TextView mActionOk, mLegend,
+    textViewLeftX, textViewCenterX, textViewRightX,
+    textViewDownY, textViewCenterY, textViewUpY;
     private long attribute_id = 0;
     String item, titleObject, titlePlate;
     ArrayList<String> spinnerList = new ArrayList<String>();
@@ -315,20 +310,25 @@ public class ConditionActivity extends AppCompatActivity {
         return max;
     }
 
-    // Нормализация, массив, спектр Фурье (Не используется)
-    public double[][] normalization(double[][] points){
-        double max = points[0][0];
+    public double maxPoint(double[] points){
+        double max = Double.MIN_VALUE;
         for (int i = 0; i < points.length; i++)
-            for (int j = 0; j < points[0].length; j++)
-                if (max < points[i][j])
-                    max = points[i][j];
+            if (max < points[i])
+                max = points[i];
 
-        for (int i = 0; i < points.length; i++)
-            for (int j = 0; j < points[0].length; j++)
-                points[i][j] /= max;
-
-        return points;
+        return max;
     }
+
+    public double minPoint(double[] points){
+        double min = Double.MAX_VALUE;
+        for (int i = 0; i < points.length; i++)
+            if (min > points[i])
+                min = points[i];
+
+        return min;
+    }
+
+
     // Нормализация, сигнал (переопределение для первого атрибута)
     public ArrayList<Trace> normalization(ArrayList<Trace> trails){
         for (int i = 0; i < trails.size(); i++) {
@@ -656,14 +656,28 @@ public class ConditionActivity extends AppCompatActivity {
                 //        System.out.println("Interpolated value: " + interpolatedValue);
                 s = s + Double.toString(interpolatedValue) + "    ";
                 //t1.setText(String.valueOf(s));
-                int color = getColorForTile((int) Math.round(interpolatedValue));
+                int color = getColorForTile(points, interpolatedValue);
                 resultBitmap.setPixel(i, j, color);
             }
             s += "\n";
         }
 
         imageView.setImageBitmap(resultBitmap);
-        drawChart(xNew, yNew);
+        textViewLeftX = findViewById(R.id.textViewLeftX);
+        textViewCenterX = findViewById(R.id.textViewCenterX);
+        textViewRightX = findViewById(R.id.textViewRightX);
+        textViewLeftX.setText(String.valueOf(minPoint(xNew)));
+        double center = minPoint(xNew) + (maxPoint(xNew) - minPoint(xNew)) * 1.0 / 2;
+        textViewCenterX.setText(String.valueOf(center));
+        textViewRightX.setText(String.valueOf(maxPoint(xNew)));
+
+        textViewDownY = findViewById(R.id.textViewDownY);
+        textViewCenterY = findViewById(R.id.textViewCenterY);
+        textViewUpY = findViewById(R.id.textViewUpY);
+        textViewDownY.setText(String.valueOf(minPoint(yNew)));
+        center = minPoint(yNew) + (maxPoint(yNew) - minPoint(yNew)) * 1.0 / 2;
+        textViewCenterY.setText(String.valueOf(center));
+        textViewUpY.setText(String.valueOf(maxPoint(yNew)));
     }
 
     private void drawChart(double[] xNew, double yNew[]){
@@ -739,14 +753,20 @@ public class ConditionActivity extends AppCompatActivity {
         return result;
     }
 
-    private int getColorForTile(int strength) {
-        if (strength >= 10) {
+    private int getColorForTile(double[][] points, double value) {
+        double max = Double.MIN_VALUE;
+        for (int i = 0; i < points.length; i++)
+            for (int j = 0; j < points[0].length; j++)
+                if (max < points[i][j])
+                    max = points[i][j];
+        double delimiter = max * 1.0 / 5;
+        if (value >= delimiter * 4) {
             return Color.GREEN;
-        } else if (strength >= 8) {
+        } else if (value >= delimiter * 3) {
             return Color.YELLOW;
-        } else if (strength >= 6){
+        } else if (value >= delimiter * 2){
             return ContextCompat.getColor(this, R.color.orange);
-        } else if (strength >= 3) {
+        } else if (value >= delimiter) {
             return ContextCompat.getColor(this, R.color.light_red);
         }
         else {
