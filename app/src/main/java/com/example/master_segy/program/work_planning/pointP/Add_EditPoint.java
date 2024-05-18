@@ -119,7 +119,7 @@ public class Add_EditPoint extends DialogFragment {
         // Если в базе данных есть хотя бы одна точка
         if (pointList != null && pointList.size() != 0){
             // Если точка уже существует, то не добавляем
-            if (db.pointDao().is_Exist(coordinateX, coordinateY))
+            if (db.pointDao().is_Exist(coordinateX, coordinateY, ID_plate))
                 return;
             // Если не существует
             point = new Point(coordinateX, coordinateY, ID_plate);
@@ -131,7 +131,7 @@ public class Add_EditPoint extends DialogFragment {
             double max_y = max_y() > coordinateY ? coordinateY : max_y();
             for (double x : arrayX){
                 for (double y : arrayY){
-                    if (!db.pointDao().is_Exist(x, y)){
+                    if (!db.pointDao().is_Exist(x, y, ID_plate)){
                         point = new Point(x, y, ID_plate);
                         db.pointDao().insert(point);
                     }

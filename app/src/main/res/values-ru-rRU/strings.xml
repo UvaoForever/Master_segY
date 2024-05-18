@@ -85,4 +85,10 @@
     <string name="plate_light_red">Плита серьёзно повреждена</string>
     <string name="plate_red">Плита в критическом состоянии</string>
     <string name="btn_legend">Легенда</string>
+    <string name="btn_close">Закрыть</string>
+    <string name="text_result">Результат добавления</string>
+    <string name="text_incorrectNamesOfFiles">Неверно названные файлы:</string>
+    <string name="text_NoPoints">Для этих файлов не существует точек:</string>
+    <string name="text_ReplasedReports">Заменённые отчёты:</string>
+    <string name="text_NoFiles">Файлов нет</string>
 </resources>

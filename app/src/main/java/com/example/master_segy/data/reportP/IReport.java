@@ -20,6 +20,10 @@ public interface IReport {
     List<Report> getAll();
     @Query("SELECT * FROM report WHERE id_point = :id")
     List<Report> getAllPoint(long id);
+    @Query("SELECT _id FROM report WHERE title_report = :title_report")
+    int getIdReportByTitleReport(String title_report);
     @Query("SELECT * FROM report WHERE _id = :id")
     Report getById(long id);
+    @Query("SELECT * FROM report WHERE title_report = :title_report AND id_point = :id LIMIT 1")
+    boolean is_Exist(String title_report, long id);
 }

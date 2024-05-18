@@ -88,7 +88,8 @@ public class Add_ArrayPoints extends DialogFragment{
 
     private void saveNewPoint(double coordinateX, double coordinateY) {
         point = new Point(coordinateX, coordinateY, ID_plate);
-        db.pointDao().insert(point);
+        if (!db.pointDao().is_Exist(coordinateX, coordinateY, ID_plate))
+            db.pointDao().insert(point);
     }
     @Override
     public void onDismiss(DialogInterface dialog) {

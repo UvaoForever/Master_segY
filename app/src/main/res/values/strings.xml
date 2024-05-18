@@ -89,4 +89,10 @@
     <string name="plate_light_red">The plate is serious damaged</string>
     <string name="plate_red">The plate is in critical condition</string>
     <string name="btn_legend">Legend</string>
+    <string name="btn_close">Close</string>
+    <string name="text_result">Result of adding</string>
+    <string name="text_incorrectNamesOfFiles">Incorrectly named files:</string>
+    <string name="text_NoPoints">There are no points for these files:</string>
+    <string name="text_ReplasedReports">Replaced reports:</string>
+    <string name="text_NoFiles">No files</string>
 </resources>

@@ -24,6 +24,6 @@ public interface IPoint {
     List<Point> getAllObject(long id);
     @Query("SELECT * FROM point WHERE _id = :id")
     Point getById(long id);
-    @Query("SELECT * FROM point WHERE coordinate_X = :coordinate_X AND coordinate_Y = :coordinate_Y LIMIT 1")
-    boolean is_Exist(double coordinate_X, double coordinate_Y);
+    @Query("SELECT * FROM point WHERE coordinate_X = :coordinate_X AND coordinate_Y = :coordinate_Y AND id_Plate = :id LIMIT 1")
+    boolean is_Exist(double coordinate_X, double coordinate_Y, long id);
 }

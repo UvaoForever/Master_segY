@@ -66,6 +66,7 @@ public class ConditionActivity extends AppCompatActivity {
     private TextView mActionOk, mLegend,
     textViewLeftX, textViewCenterX, textViewRightX,
     textViewDownY, textViewCenterY, textViewUpY;
+    ConditionLegend dialog;
     private long attribute_id = 0;
     String item, titleObject, titlePlate;
     ArrayList<String> spinnerList = new ArrayList<String>();
@@ -165,7 +166,6 @@ public class ConditionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                  Bundle bundle = new Bundle();
-                 ConditionLegend dialog = new ConditionLegend();
                  dialog.setArguments(bundle);
                  dialog.show(getSupportFragmentManager(), "c");
                 }
@@ -269,7 +269,14 @@ public class ConditionActivity extends AppCompatActivity {
             default: return;
         }
         interpolation(points);
-        //createLegend();
+
+        double max = Double.MIN_VALUE;
+        for (int i = 0; i < points.length; i++)
+            for (int j = 0; j < points[0].length; j++)
+                if (max < points[i][j])
+                    max = points[i][j];
+
+        dialog = new ConditionLegend(max);
     }
 
     // Возможно удалить
@@ -506,15 +513,12 @@ public class ConditionActivity extends AppCompatActivity {
             FastFourierTransformer transformer = new FastFourierTransformer(DftNormalization.STANDARD);
             Complex[] transformedData = transformer.transform(signal, TransformType.FORWARD);
             double maxAmplitude = Double.MIN_VALUE;
-            double minAmplitude = Double.MAX_VALUE;
 
             for (int j = 0; j < transformedData.length / 2; j++) {
                 //double amplitude = Math.pow(transformedData[j].abs(), 2);
                 double amplitude = Math.pow(transformedData[j].abs(), 2);
                 if (amplitude > maxAmplitude)
                     maxAmplitude = amplitude;
-                if (amplitude < minAmplitude)
-                    minAmplitude = amplitude;
             }
 
             double df = 1 * 1.0 / (traceList.get(i).get_dt() * (traceList.get(i).get_samples_count() - 1));
@@ -678,58 +682,6 @@ public class ConditionActivity extends AppCompatActivity {
         center = minPoint(yNew) + (maxPoint(yNew) - minPoint(yNew)) * 1.0 / 2;
         textViewCenterY.setText(String.valueOf(center));
         textViewUpY.setText(String.valueOf(maxPoint(yNew)));
-    }
-
-    private void drawChart(double[] xNew, double yNew[]){
-        /*ImageView imageY = findViewById(R.id.imageViewY);
-        Bitmap bitmap = Bitmap.createBitmap(10, 10,
-                Bitmap.Config.ARGB_8888); // Область рисования для вывода или сохранения
-        Canvas bitmapCanvas = new Canvas(bitmap); // Используется для рисования на Bitmap
-        Paint paintScreen; // Используется для вывода Bitmap на экран
-        Paint paintLine = new Paint(); // Используется для рисования линий на Bitmap
-        // Исходные параметры рисуемых линий
-        paintLine = new Paint();
-        paintLine.setFilterBitmap(false);
-        paintLine.setAntiAlias(true); // Сглаживание краев
-        paintLine.setColor(Color.BLACK); // По умолчанию черный цвет
-        paintLine.setStyle(Paint.Style.STROKE); // Сплошная линия
-        paintLine.setStrokeWidth(5); // Толщина линии по умолчанию
-        paintLine.setStrokeCap(Paint.Cap.ROUND); // Закругленные концы
-        paintLine.setColor(Color.BLACK); // По умолчанию черный цвет
-        bitmapCanvas.drawLine(0, 0, 10, 0, paintLine);
-        bitmapCanvas.drawLine(5, 0, 5, 10, paintLine);
-
-        imageY.setImageBitmap(bitmap);*/
-
-        ConditionGraph graph = new ConditionGraph(this);
-        ImageView imageY = findViewById(R.id.imageViewY);
-        Bitmap bitmap = Bitmap.createBitmap(10, 10,
-                Bitmap.Config.ARGB_8888); // Область рисования для вывода или сохранения
-        Canvas bitmapCanvas = new Canvas(bitmap);
-        graph.onDraw(bitmapCanvas);
-        //setContentView(graph);
-
-        /*LineChart lineChart = findViewById(R.id.lineChart);
-
-        List<Entry> entries = new ArrayList<>();
-        entries.add(new Entry(0, 10)); // Точка с координатами x = 0, y = 10
-        entries.add(new Entry(1, 20)); // Точка с координатами x = 1, y = 20
-        entries.add(new Entry(2, 15)); // Точка с координатами x = 2, y = 15
-// Добавьте еще точки по мере необходимости
-
-        LineDataSet dataSet = new LineDataSet(entries, "Точки");
-        dataSet.setDrawCircles(true); // Отобразить окружности вокруг точек
-        dataSet.setColors(Color.RED); // Цвет точек и линии, если нужно
-
-        LineData lineData = new LineData(dataSet);
-        lineChart.setData(lineData);
-        lineChart.invalidate(); // Обновляет график*/
-
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
     }
 
     public String getFileName(Uri uri) {

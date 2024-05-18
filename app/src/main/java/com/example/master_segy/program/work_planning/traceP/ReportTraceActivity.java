@@ -104,6 +104,9 @@ public class ReportTraceActivity extends AppCompatActivity {
         loadFile();
         initRecyclerView();
     }
+
+    // Вызов диалогового окна для выбора папки
+
     private void readFile(Uri returnUri) {
 
         String fileName = getFileName(returnUri);
@@ -157,9 +160,6 @@ public class ReportTraceActivity extends AppCompatActivity {
             loadFile();
             viewGraph();
             }
-
-
-
     }
 
     @Override
@@ -200,7 +200,8 @@ public class ReportTraceActivity extends AppCompatActivity {
         }
         return result;
     }
-    private void save(){db.traceDao().deleteToReport(report.get_id());
+    private void save(){
+        db.traceDao().deleteToReport(report.get_id());
         for(Trace trace: trails) {
             db.traceDao().insert(trace);
         }

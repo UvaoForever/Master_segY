@@ -20,6 +20,14 @@ import com.example.master_segy.data.pointP.Point;
 import com.google.android.gms.location.LocationServices;
 
 public class ConditionLegend extends DialogFragment {
+
+    private double max;
+
+    private TextView btnOK;
+
+    public ConditionLegend(double _max){
+        max = _max;
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -31,6 +39,7 @@ public class ConditionLegend extends DialogFragment {
         TextView textOrange = view.findViewById(R.id.textViewLegendOrange);
         TextView textLigthRed = view.findViewById(R.id.textViewLegendLightRed);
         TextView textRed = view.findViewById(R.id.textViewLegendRed);
+        btnOK = view.findViewById(R.id.buttonCloseLegend);
 
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         int height = displayMetrics.heightPixels / 2;
@@ -69,13 +78,22 @@ public class ConditionLegend extends DialogFragment {
             }
         }
 
-        textGreen.setText(R.string.plate_green);
-        textYellow.setText(R.string.plate_yellow);
-        textOrange.setText(R.string.plate_orange);
-        textLigthRed.setText(R.string.plate_light_red);
-        textRed.setText(R.string.plate_red);
+        double part = max * 1.0 / 5;
+
+        textGreen.setText(String.valueOf((part * 5)));
+        textYellow.setText(String.valueOf((part * 4) + " - " + (part * 5)));
+        textOrange.setText(String.valueOf((part * 3) + " - " + (part * 4)));
+        textLigthRed.setText(String.valueOf((part * 2) + " - " + (part * 3)));
+        textRed.setText(String.valueOf((part) + " - " + (part * 2)));
 
         imageViewLegend.setImageBitmap(legendBitmap);
+
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDialog().dismiss();
+            }
+        });
 
         return view;
     }

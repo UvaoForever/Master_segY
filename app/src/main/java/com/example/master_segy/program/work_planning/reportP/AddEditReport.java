@@ -67,6 +67,8 @@ public class AddEditReport extends DialogFragment {
     }
     private void saveNewReport(String titleReport) {
         report = new Report(titleReport, ID_point);
+        if (db.reportDao().is_Exist(report.get_titleReport(), ID_point))
+            return;
         db.reportDao().insert(report);
     }
     private void saveReport(String titleReport) {
