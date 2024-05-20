@@ -14,7 +14,7 @@
             android:title="@string/title_activity_primary_processing" />
         <item
             android:id="@+id/nav_plate_condition"
-            android:icon="@drawable/baseline_calendar_month_24"
+            android:icon="@drawable/baseline_monitor_heart_24"
             android:title="@string/title_activity_plate_condition" />
 
     </group>
