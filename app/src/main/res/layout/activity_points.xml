@@ -33,14 +33,6 @@
             android:layout_margin="10dp"
             android:background="@drawable/style_row"></androidx.recyclerview.widget.RecyclerView>
 
-        <TextView
-            android:id="@+id/textViewShare"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/share"
-            app:drawableStartCompat="@drawable/baseline_share_24" />
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

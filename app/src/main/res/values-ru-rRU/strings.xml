@@ -68,8 +68,8 @@
     <string name="stepY">Шаг Y</string>
     <string name="selectAttribute">Выберите атрибут</string>
     <string name="selectPlate">Выберите плиту</string>
-    <string name="enterStepX">Введите шаг по X</string>
-    <string name="enterStepY">Введите шаг по Y</string>
+    <string name="enterStepX">Введите кол-во X</string>
+    <string name="enterStepY">Введите кол-во Y</string>
     <string name="btnCalculate">Посчитать</string>
     <string name="attr1">Атрибут 1 - Значение сигнала</string>
     <string name="attr2">Атрибут 2 - Нормированный сигнал</string>
@@ -91,4 +91,5 @@
     <string name="text_NoPoints">Для этих файлов не существует точек:</string>
     <string name="text_ReplasedReports">Заменённые отчёты:</string>
     <string name="text_NoFiles">Файлов нет</string>
+    <string name="text_NullPoint">Кол-во должно начинаться с 1</string>
 </resources>

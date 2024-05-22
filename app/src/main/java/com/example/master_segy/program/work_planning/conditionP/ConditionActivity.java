@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -97,6 +98,7 @@ public class ConditionActivity extends AppCompatActivity {
 
         mActionOk = findViewById(R.id.buttonCalculate);
         mLegend = findViewById(R.id.buttonLegend);
+        mLegend.setVisibility(View.INVISIBLE);
 
         createSpinnerList(); // Формирование списка для spinnerPlate
         createAttributeList(); // Формирование списка для spinnerAttribute
@@ -156,6 +158,10 @@ public class ConditionActivity extends AppCompatActivity {
                 if (isValid()) {
                     correctionTraceList(titleObject, titlePlate);
                     creatingArrays();
+                    if (Integer.parseInt(String.valueOf(editText_X.getText())) < 1 || Integer.parseInt(String.valueOf(editText_Y.getText())) < 1){
+                        Toast.makeText(getBaseContext(), R.string.text_NullPoint, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     dataReadingFromBD();
                 }
             }
@@ -277,6 +283,7 @@ public class ConditionActivity extends AppCompatActivity {
                     max = points[i][j];
 
         dialog = new ConditionLegend(max);
+        mLegend.setVisibility(View.VISIBLE);
     }
 
     // Возможно удалить
@@ -550,8 +557,6 @@ public class ConditionActivity extends AppCompatActivity {
     }
 
     public void interpolation(double[][] points){
-        TextView t1 = findViewById(R.id.resultText);
-
         // Создание объекта интерполятора
         BicubicInterpolator interpolator = new BicubicInterpolator();
 
@@ -659,7 +664,6 @@ public class ConditionActivity extends AppCompatActivity {
                 interpolatedValue = Double.parseDouble(String.valueOf(interpolatedValue));
                 //        System.out.println("Interpolated value: " + interpolatedValue);
                 s = s + Double.toString(interpolatedValue) + "    ";
-                //t1.setText(String.valueOf(s));
                 int color = getColorForTile(points, interpolatedValue);
                 resultBitmap.setPixel(i, j, color);
             }

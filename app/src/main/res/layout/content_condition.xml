@@ -10,18 +10,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/resultText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.047"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.039" />
-
         <Spinner
             android:id="@+id/spinnerPlate"
             android:layout_width="match_parent"
@@ -39,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:hint="@string/enterStepX"
-                android:inputType="number|numberDecimal" />
+                android:inputType="number|numberSigned" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -53,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:hint="@string/enterStepY"
-                android:inputType="number|numberDecimal" />
+                android:inputType="number|numberSigned" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
