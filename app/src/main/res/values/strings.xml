@@ -96,4 +96,5 @@
     <string name="text_ReplasedReports">Replaced reports:</string>
     <string name="text_NoFiles">No files</string>
     <string name="text_NullPoint">Count must start from 1</string>
+    <string name="text_CountPoint">The number of files should not exceed the number of points</string>
 </resources>

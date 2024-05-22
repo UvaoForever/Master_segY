@@ -179,8 +179,8 @@ public class PointsActivity extends AppCompatActivity {
             path = path.substring(index + 1);
             File folder = new File(path);
             File[] files = folder.listFiles();
-            if (pointList.size() != folder.listFiles().length) {
-                Toast.makeText(this, "Количество файлов должно соответстовать количеству точек", Toast.LENGTH_SHORT).show();
+            if (pointList.size() < folder.listFiles().length) {
+                Toast.makeText(this, R.string.text_CountPoint, Toast.LENGTH_SHORT).show();
                 return;
             }
 

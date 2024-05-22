@@ -92,4 +92,5 @@
     <string name="text_ReplasedReports">Заменённые отчёты:</string>
     <string name="text_NoFiles">Файлов нет</string>
     <string name="text_NullPoint">Кол-во должно начинаться с 1</string>
+    <string name="text_CountPoint">Количество файлов не должно превосходить количество точек</string>
 </resources>
