@@ -22,8 +22,6 @@ public interface ITrace {
     void deleteToReport(long id);
     @Query("SELECT * FROM trace WHERE _id = :id")
     Trace getById(long id);
-    @Query("SELECT _id FROM trace WHERE title_trace = :title_trace")
-    int getIdReportByTitleTrace(String title_trace);
     @Query("SELECT * FROM trace WHERE id_report = :id")
     List<Trace> getAllReport(long id);
 }

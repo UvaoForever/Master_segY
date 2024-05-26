@@ -7,8 +7,6 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 
-import com.example.master_segy.data.pointP.Point;
-
 import java.util.List;
 @Dao
 public interface IPoint {
@@ -21,7 +19,7 @@ public interface IPoint {
     @Query("SELECT * FROM point")
     List<Point> getAll();
     @Query("SELECT * FROM point WHERE id_Plate = :id")
-    List<Point> getAllObject(long id);
+    List<Point> getAllPlate(long id);
     @Query("SELECT * FROM point WHERE _id = :id")
     Point getById(long id);
     @Query("SELECT * FROM point WHERE coordinate_X = :coordinate_X AND coordinate_Y = :coordinate_Y AND id_Plate = :id LIMIT 1")

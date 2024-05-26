@@ -46,6 +46,7 @@ public class Add_EditPlate extends DialogFragment {
         View view = inflater.inflate(R.layout.add_edit_plate, container, false);
         mActionOk = view.findViewById(R.id.buttonSavePlate);
         textInputLayoutTitle = view.findViewById(R.id.inputLayoutTitlePlate);
+        textInputLayoutDescription = view.findViewById(R.id.inputLayoutDescription);
         editTextTitle = view.findViewById(R.id.inputTitlePlate);
         editTextDescription = view.findViewById(R.id.inputDescription);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
@@ -108,10 +109,6 @@ public class Add_EditPlate extends DialogFragment {
             flag = false;
         } else {
             textInputLayoutTitle.setErrorEnabled(false);
-        }
-        if (editTextDescription.getText().toString().isEmpty()) {
-            textInputLayoutDescription.setError(getString(R.string.descriptionError));
-            flag = false;
         }
         return flag;
     }

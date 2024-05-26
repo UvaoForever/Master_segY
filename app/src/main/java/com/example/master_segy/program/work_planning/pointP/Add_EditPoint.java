@@ -16,10 +16,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.master_segy.R;
 import com.example.master_segy.data.AppDataBase;
-import com.example.master_segy.data.objectLocationP.ObjectLocation;
-import com.example.master_segy.data.plateP.Plate;
 import com.example.master_segy.data.pointP.Point;
-import com.example.master_segy.program.work_planning.plateP.PlatesActivity;
 import com.example.master_segy.program.work_planning.reportP.ReportsActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -115,7 +112,7 @@ public class Add_EditPoint extends DialogFragment {
     }
 
     private void saveNewPoint(double coordinateX, double coordinateY) {
-        pointList = new ArrayList<Point>(db.pointDao().getAllObject(ID_plate));
+        pointList = new ArrayList<Point>(db.pointDao().getAllPlate(ID_plate));
         // Если в базе данных есть хотя бы одна точка
         if (pointList != null && pointList.size() != 0){
             // Если точка уже существует, то не добавляем

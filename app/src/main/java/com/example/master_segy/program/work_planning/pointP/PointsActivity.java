@@ -18,11 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.master_segy.BuildConfig;
 import com.example.master_segy.R;
 import com.example.master_segy.data.AppDataBase;
 import com.example.master_segy.data.plateP.Plate;
@@ -31,19 +29,11 @@ import com.example.master_segy.data.reportP.Report;
 import com.example.master_segy.data.traceP.Trace;
 import com.example.master_segy.program.CustomDividerItemDecoration;
 import com.example.master_segy.program.DataReaderTraceFile_Segy;
-import com.example.master_segy.program.work_planning.conditionP.ConditionLegend;
 import com.example.master_segy.program.work_planning.plateP.Add_EditPlate;
 import com.example.master_segy.program.work_planning.reportP.ReportsActivity;
-import com.example.master_segy.program.work_planning.traceP.ReportTraceActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -147,7 +137,7 @@ public class PointsActivity extends AppCompatActivity {
     }
 
     public void loadPoints() {
-        pointAdapter.setPointList(db.pointDao().getAllObject(plate.get_id()));
+        pointAdapter.setPointList(db.pointDao().getAllPlate(plate.get_id()));
     }
 
     public void update(){
@@ -169,7 +159,7 @@ public class PointsActivity extends AppCompatActivity {
         ArrayList<String> errorFileList = new ArrayList<String>();
         ArrayList<String> updateReportList = new ArrayList<String>();
         ArrayList<String> noPointsList = new ArrayList<String>();
-        pointList = new ArrayList<Point>(db.pointDao().getAllObject(plate.get_id()));
+        pointList = new ArrayList<Point>(db.pointDao().getAllPlate(plate.get_id()));
 
         if (requestCode == REQUEST_CODE_PICK_FOLDER && resultCode == RESULT_OK) {
             // Получение URI выбранной папки
