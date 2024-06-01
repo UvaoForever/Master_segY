@@ -51,7 +51,6 @@ public class PlatesActivity extends AppCompatActivity {
     Toolbar toolbar;
     Plate plate;
     private PlateAdapter plateAdapter;
-    TextView share;
     private FloatingActionButton addPlate;
     RecyclerView recyclerView;
     AppDataBase db;

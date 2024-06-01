@@ -59,8 +59,8 @@
 
     <string name="title_activity_plate_condition">Plate Condition</string>
     <string name="description">Description</string>
-    <string name="x">Coordinate X</string>
-    <string name="y">Coordinate Y</string>
+    <string name="x">X</string>
+    <string name="y">Y</string>
     <string name="descriptionError">Description field must be filled</string>
     <string name="xError">Coordinate X must be filled</string>
     <string name="yError">Coordinate Y must be filled</string>

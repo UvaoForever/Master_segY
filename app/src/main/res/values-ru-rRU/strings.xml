@@ -55,8 +55,8 @@
 
     <string name="title_activity_plate_condition">Состояние плиты</string>
     <string name="description">Описание</string>
-    <string name="x">Координата X</string>
-    <string name="y">Координата Y</string>
+    <string name="x">X</string>
+    <string name="y">Y</string>
     <string name="descriptionError">Описание должно быть обязательно заполнено</string>
     <string name="xError">Координата X должна быть заполнена</string>
     <string name="yError">Координата Y должна быть заполнена</string>

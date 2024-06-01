@@ -44,7 +44,6 @@ public class PointsActivity extends AppCompatActivity {
     private PointAdapter pointAdapter;
 
     AddSeveralFiles dialog;
-    TextView share;
     private FloatingActionButton addPoint, addReports;
     RecyclerView recyclerView;
     AppDataBase db;

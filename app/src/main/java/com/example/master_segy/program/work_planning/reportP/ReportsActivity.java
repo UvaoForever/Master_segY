@@ -46,9 +46,6 @@ public class ReportsActivity extends AppCompatActivity {
         point = db.pointDao().getById(getIntent().getIntExtra(POINT_ID,0));
         addReport = findViewById(R.id.fabAddReport);
         recyclerView = findViewById(R.id.recyclerViewReport);
-        /*textViewX = findViewById(R.id.textViewCoordinateX);
-        textViewY = findViewById(R.id.textViewCoordinateY);
-        textViewAmp = findViewById(R.id.textViewCoordinateAmp);*/
         ReportAdapter.OnReportClickListener stateClickListener = new ReportAdapter.OnReportClickListener() {
             @Override
             public void onReportClick(Report report, int position) {

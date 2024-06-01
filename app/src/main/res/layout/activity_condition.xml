@@ -7,17 +7,19 @@
     android:orientation="vertical"
     tools:context=".program.work_planning.conditionP.ConditionActivity"
     android:background="@color/background">
+
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.Master_segY.AppBarOverlay">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/toolbar"
-            app:popupTheme="@style/Theme.Master_segY.PopupOverlay"
-            />
+            app:popupTheme="@style/Theme.Master_segY.PopupOverlay" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <include
