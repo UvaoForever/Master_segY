@@ -73,7 +73,6 @@ public class ConditionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_condition);
         binding = ActivityConditionBinding.inflate(getLayoutInflater());
@@ -351,11 +350,11 @@ public class ConditionActivity extends AppCompatActivity {
         double e = 0;
         double[][] points = new double[arrayX.size()][arrayY.size()];
 
-        for (int i = 0; i < trails.size(); i++) { // НЫНЕШНИЙ ЦИКЛ
+        for (int i = 0; i < trails.size(); i++) {
             int idReport = reportList.get(i).get_id();
             int idPoint = db.reportDao().getById(idReport).get_id_Point();
-            int x = (int) db.pointDao().getById(idPoint).get_coordinate_X(); // Подумать над типом
-            int y = (int) db.pointDao().getById(idPoint).get_coordinate_Y(); // Подумать над типом
+            int x = (int) db.pointDao().getById(idPoint).get_coordinate_X();
+            int y = (int) db.pointDao().getById(idPoint).get_coordinate_Y();
             int index_x = 0;
             int index_y = 0;
             e = 0;
@@ -385,8 +384,8 @@ public class ConditionActivity extends AppCompatActivity {
         for (int i = 0; i < trails.size(); i++){
             int idReport = reportList.get(i).get_id();
             int idPoint = db.reportDao().getById(idReport).get_id_Point();
-            int x = (int) db.pointDao().getById(idPoint).get_coordinate_X(); // Подумать над типом
-            int y = (int) db.pointDao().getById(idPoint).get_coordinate_Y(); // Подумать над типом
+            int x = (int) db.pointDao().getById(idPoint).get_coordinate_X();
+            int y = (int) db.pointDao().getById(idPoint).get_coordinate_Y();
             int index_x = 0;
             int index_y = 0;
             double[] signal = trails.get(i).get_signal();
@@ -445,7 +444,6 @@ public class ConditionActivity extends AppCompatActivity {
             double minAmplitude = Double.MAX_VALUE;
 
             for (int j = 0; j < transformedData.length / 2; j++) {
-                //double amplitude = Math.pow(transformedData[j].abs(), 2);
                 double amplitude = Math.pow(transformedData[j].abs(), 2);
                 if (amplitude > maxAmplitude)
                     maxAmplitude = amplitude;
@@ -454,7 +452,6 @@ public class ConditionActivity extends AppCompatActivity {
             }
 
             double df = 1 * 1.0 / (traceList.get(i).get_dt() * (traceList.get(i).get_samples_count() - 1)); // Шаг дискретизации по частоте
-            //double df = (maxAmplitude - minAmplitude) * 1.0 / (trails.get(i).get_samples_count());
             for (int j = 0; j < transformedData.length / 2; j++) {
                 double data = Math.pow(transformedData[j].abs(), 2);
                 if (normalize == true)
@@ -571,28 +568,20 @@ public class ConditionActivity extends AppCompatActivity {
 
         // Вычисление коэффициентов интерполяции
         BicubicInterpolatingFunction function = interpolator.interpolate(
-                interpolatorArrayOne, // Столько же, сколько и СТРОК (Чёткие координаты X)
-                interpolatorArrayTwo, // Для количества элементов В СТРОКЕ (Чёткие координаты Y)
+                interpolatorArrayOne, // Известные координаты X
+                interpolatorArrayTwo, // Известные координаты Y
                 points);
-
-        String s = "";
 
         for(int i = 0; i < xNew.length; i++)
         {
             for(int j = 0; j < yNew.length; j++)
             {
-                Log.i("i = ", String.valueOf(xNew[i]));
-                Log.i("j = ", String.valueOf(yNew[j]));
                 // Вычисление значения интерполяции в определенной точке
                 double interpolatedValue = function.value(xNew[i], yNew[j]);
-                //interpolatedValue = Math.round(interpolatedValue * 100.00) / 100.00;
                 interpolatedValue = Double.parseDouble(String.valueOf(interpolatedValue));
-                //        System.out.println("Interpolated value: " + interpolatedValue);
-                s = s + Double.toString(interpolatedValue) + "    ";
                 int color = getColorForTile(points, interpolatedValue);
                 resultBitmap.setPixel(i, j, color);
             }
-            s += "\n";
         }
 
         imageView.setImageBitmap(resultBitmap);
